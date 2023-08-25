@@ -15,11 +15,24 @@ const Formulario = (props) => {
     props.agregarColaborador(datosAEnviar);
   };
 
-  //Estados
+  //funcion - crear equipo
+    const manejoColorEquipo = (e) => {
+      e.preventDefault();
+      props.crearEquipo({titulo:nombreEquipo, colorPrincipal:colorEquipo})
+  }
+
+
+  //Estados F1
   const [nombre, actualizarNombre] = useState("");
   const [puesto, actualizarPuesto] = useState("");
   const [foto, actualizarFoto] = useState("");
   const [equipo, actualizarEquipo] = useState("");
+
+  //Estados F2
+  const [nombreEquipo, actualizarNombreEquipo] = useState("");
+  const [colorEquipo, actualizarColor] = useState("");
+
+
 
   // const actualizarValor = (e) => {
   //   actualizarNombre(e.target.value);
@@ -56,6 +69,24 @@ const Formulario = (props) => {
           equipos={props.equipos}
         />
         <Boton texto="Crear" />
+      </form>
+      <form onSubmit={manejoColorEquipo}>
+        <h2>Agrega nuevos equipos a tu compañia</h2>
+        <InputTexto
+          titulo="Nombre del Equipo"
+          placeholder="Ingresar nombre del equipo"
+          required
+          valor={nombreEquipo}
+          actualizarValor={actualizarNombreEquipo}
+        />
+        <InputTexto
+          titulo="Color"
+          placeholder="Ingresar el color en Hexadecimal"
+          required
+          valor={colorEquipo}
+          actualizarValor={actualizarColor}
+        />
+        <Boton texto="Crear Equipo" />
       </form>
     </section>
   );

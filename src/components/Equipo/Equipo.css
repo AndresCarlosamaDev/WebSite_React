@@ -5,6 +5,7 @@
     box-sizing: border-box;
     text-align: center;
     font-size: 32px;
+    position: relative;
 }
 
 .title-equipo {
@@ -18,4 +19,12 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
+.input-color {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: none;
+    background-color: transparent;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2);
 }
