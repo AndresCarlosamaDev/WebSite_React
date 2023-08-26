@@ -9,42 +9,47 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
   //Estado (variable vinculada a una función)
-  const [mostrarForm, updateMostrar] = useState(false);
+  const [mostrarForm, updateMostrar] = useState(true);
   const [colaboradores, updateColaboradores] = useState([
   {
     id:uuid(),
     equipo: "Front End",
     foto: "https://github.com/harlandlohora.png",
     nombre: "Harland Lohora",
-    puesto: "Instructor"
+    puesto: "Instructor",
+    fav: true
   },
   {
     id:uuid(),
     equipo: "Programación",
     foto: "https://github.com/genesysR-dev.png",
     nombre: "Genesys Rondón",
-    puesto: "Desarrolladora de software e instructora"
+    puesto: "Desarrolladora de software e instructora",
+    fav: false
   },
   {
     id:uuid(),
     equipo: "UX y Diseño",
     foto: "https://github.com/JeanmarieAluraLatam.png",
     nombre: "Jeanmarie Quijada",
-    puesto: "Instructora en Alura Latam"
+    puesto: "Instructora en Alura Latam",
+    fav: false
   },
   {
     id:uuid(),
     equipo: "Programación",
     foto: "https://github.com/christianpva.png",
     nombre: "Christian Velasco",
-    puesto: "Head de Alura e Instructor"
+    puesto: "Head de Alura e Instructor",
+    fav: false
   },
   {
     id:uuid(),
     equipo: "Innovación y Gestión",
     foto: "https://github.com/JoseDarioGonzalezCha.png",
     nombre: "Jose Gonzalez",
-    puesto: "Dev FullStack"
+    puesto: "Dev FullStack",
+    fav: false
   }
   ]);
   const [equipos, updateEquipos] = useState([
@@ -128,6 +133,17 @@ function App() {
     updateEquipos([...equipos, {...nuevoEquipo, id: uuid() }]);
   }
 
+  //Actualizacion Fav
+  const like = (id) => {
+    const cambioFav = colaboradores.map((colaborador) => {
+      if (colaborador.id === id) {
+        colaborador.fav = !colaborador.fav
+      }
+      return colaborador
+    })
+    updateColaboradores(cambioFav)
+  }
+
 
   return (
     <div>
@@ -144,13 +160,14 @@ function App() {
 
       {/* Equipos */}
       {equipos.map((equipo) => {
-        console.log("Equipo: " + equipo.titulo);
+        // console.log("Equipo: " + equipo.titulo);
         return <Equipo
         datos={equipo}
         key={equipo.titulo}
         colaboradores={colaboradores.filter(colaborador => colaborador.equipo === equipo.titulo)}
         eliminarColaborador={eliminarColaborador}
         actualizarColor={actualizarColor}
+        like={like}
         />;
       })}
       <Footer />
